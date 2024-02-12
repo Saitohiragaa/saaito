@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sim ou Não</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #frase {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            z-index: 3;
+        }
+        #sim, #nao {
+            position: absolute;
+            display: inline-block;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+        #nao {
+            left: calc(50% + 20px);
+        }
+        #imagem {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="frase">C@zinho hoje?</div>
+    <button id="sim" onclick="responderSim()">Sim</button>
+    <button id="nao" onclick="responderNao()">Não</button>
+    <img id="imagem" src="https://via.placeholder.com/150" alt="Imagem" style="display: none;">
+
+    <script>
+        let simButton = document.getElementById('sim');
+        let naoButton = document.getElementById('nao');
+        let imagem = document.getElementById('imagem');
+        let movimentoAtivo = true;
+
+        function moverBotao() {
+            if (movimentoAtivo) {
+                let newX = Math.random() * (window.innerWidth - 300);
+                let newY = Math.random() * (window.innerHeight - 50);
+                simButton.style.left = newX + 'px';
+                naoButton.style.left = (newX + 170) + 'px';
+                simButton.style.top = newY + 'px';
+                naoButton.style.top = newY + 'px';
+            }
+        }
+
+        function responderSim() {
+            movimentoAtivo = false;
+            simButton.style.display = 'none';
+            naoButton.style.display = 'none';
+            imagem.style.display = 'block';
+            imagem.src = 'https://i.pinimg.com/564x/c5/f3/e2/c5f3e2e914f0b2eb4c663e691a9759e7.jpg';
+        }
+
+        function responderNao() {
+            moverBotao();
+        }
+
+        setInterval(moverBotao, 2000); // Move os botões automaticamente a cada 2 segundos
+    </script>
+</body>
+</html>
